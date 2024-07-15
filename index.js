@@ -1,3 +1,5 @@
+console.clear();
+
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
 
 export const cardContainer = document.querySelector(
@@ -16,4 +18,21 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
-CharacterCard();
+
+// Fetch data
+const url = "https://rickandmortyapi.com/api/character/";
+async function fetchData() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    cardContainer.innerHTML = "";
+    data.results.forEach((character) => {
+      const characterCard = CharacterCard(character);
+      cardContainer.appendChild(characterCard);
+    });
+  } catch (error) {
+    console.log("Failed to fetch charatcers", error);
+  }
+}
+fetchData();
