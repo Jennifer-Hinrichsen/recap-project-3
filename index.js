@@ -21,17 +21,18 @@ const searchQuery = "";
 
 // Fetch data
 const url = "https://rickandmortyapi.com/api/character/";
-export async function fetchData() {
+async function fetchData() {
   try {
     const response = await fetch(url);
     const data = await response.json();
 
     cardContainer.innerHTML = "";
     data.results.forEach((character) => {
-      CharacterCard(character);
+      const characterCard = CharacterCard(character);
+      cardContainer.appendChild(characterCard);
     });
   } catch (error) {
-    console.log(error);
+    console.log("Failed to fetch charatcers", error);
   }
 }
 fetchData();
