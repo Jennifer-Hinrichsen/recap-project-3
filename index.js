@@ -8,7 +8,7 @@ export const cardContainer = document.querySelector(
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
-const searchBar = document.querySelector('[data-js="search-bar"]');
+export const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
 const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
@@ -22,6 +22,7 @@ const searchQuery = "";
 // Fetch data
 async function fetchData(page) {
   const url = "https://rickandmortyapi.com/api/character?page=${page}";
+
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -35,8 +36,10 @@ async function fetchData(page) {
       const characterCard = CharacterCard(character);
       cardContainer.appendChild(characterCard);
     });
+
+    return data.results;
   } catch (error) {
-    console.log("Failed to fetch charatcers", error);
+    console.log("Failed to fetch characters", error);
   }
 }
 
