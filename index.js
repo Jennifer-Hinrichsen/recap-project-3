@@ -17,10 +17,23 @@ const pagination = document.querySelector('[data-js="pagination"]');
 // States
 let maxPage = 1;
 let page = 1;
-const searchQuery = "";
+let searchQuery = "";
+
+// Search bar
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData);
+  searchQuery = data.query.toLowerCase();
+
+  page = 1;
+
+  fetchData();
+});
 
 // Fetch data
-export async function fetchData(page) {
+export async function fetchData() {
   const url = `https://rickandmortyapi.com/api/character?page=${page}&name=${searchQuery}`;
 
   try {
