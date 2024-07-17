@@ -20,7 +20,7 @@ let page = 1;
 const searchQuery = "";
 
 // Fetch data
-export async function fetchData(page) {
+export async function fetchData(page, searchQuery) {
   const url = `https://rickandmortyapi.com/api/character?page=${page}&name=${searchQuery}`;
 
   try {
@@ -50,15 +50,15 @@ function updatePagination(page) {
 prevButton.addEventListener("click", () => {
   if (page > 1) {
     page--;
-    fetchData(page);
+    fetchData(page, searchQuery);
   }
 });
 
 nextButton.addEventListener("click", () => {
   if (page < maxPage) {
     page++;
-    fetchData(page);
+    fetchData(page, searchQuery);
   }
 });
 
-fetchData(page);
+fetchData(page, searchQuery);
